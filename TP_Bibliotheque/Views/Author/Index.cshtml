@@ -1,0 +1,17 @@
+﻿@model TP_Bibliotheque.Models.AuthorModelView
+
+@{
+    ViewBag.Title = "Liste des auteurs.";
+}
+
+Liste des auteurs
+<ul>
+    @foreach (var auteur in @Model.GetAuthors())
+    {
+        <li>
+            @auteur.Id , @auteur.Name , @auteur.Firstname (TODO  edit / remove)
+        </li>
+    }
+
+    @Html.ActionLink("Add Author", "Add");
+</ul>

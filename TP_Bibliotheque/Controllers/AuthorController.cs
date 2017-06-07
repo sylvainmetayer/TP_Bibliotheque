@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TP_Bibliotheque.Models;
 using TP_Bibliotheque.Models.DAL;
 using TP_Bibliotheque.Models.Data;
 
@@ -10,17 +11,42 @@ namespace TP_Bibliotheque.Controllers
 {
     public class AuthorController : Controller
     {
-        public List<Author> authors;
+        private AuthorModelView modelView;
+        private AuthorDAL dal;
+
+        public AuthorController()
+        {
+            // TODO Find a way to instanciate this, because it's easier to use than instanciate on the fly in methods
+            //dal = new AuthorDAL((List<Author>)Session["Authors"]);
+        }
 
         // GET: Author
         public ActionResult Index()
         {
-            authors = (List<Author>)Session["Authors"];
+            modelView = new AuthorModelView((List<Author>)Session["Authors"]);
 
-            var dal = new AuthorDAL(authors);
-            List<Author> authorsList = dal.GetAll();
+            return View(modelView);
+        }
 
-            return View(authorsList);
+        public ActionResult Add()
+        {
+            Author author = new Author();
+
+            return View(author);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "Name, Firstname")]Author author)
+        {
+            AuthorDAL dal = new AuthorDAL((List<Author>)Session["Authors"]);
+            if (ModelState.IsValid)
+            {
+                dal.Add(author);
+                return RedirectToAction("Index");
+            }
+
+            return View(author);
         }
     }
 }

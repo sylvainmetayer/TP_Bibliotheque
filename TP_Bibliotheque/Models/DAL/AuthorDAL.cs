@@ -18,7 +18,11 @@ namespace TP_Bibliotheque.Models.DAL
         public void Add(Author element)
         {
             if (element != null)
+            {
+                element.Id = BaseUser.IdMax;
+                BaseUser.IdMax++;
                 this.Authors.Add(element);
+            }
         }
 
         public void Delete(int id)

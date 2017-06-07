@@ -11,6 +11,9 @@ using Random = TP_Bibliotheque.Models.Random.Random;
 
 namespace TP_Bibliotheque
 {
+
+    // DOC : https://docs.microsoft.com/en-us/aspnet/mvc/overview/getting-started/getting-started-with-ef-using-mvc/creating-an-entity-framework-data-model-for-an-asp-net-mvc-application
+
     public class MvcApplication : System.Web.HttpApplication
     {
         protected void Application_Start()
@@ -47,8 +50,7 @@ namespace TP_Bibliotheque
             for (int i = 0; i < random.Next(10, 20); i++)
             {
                 Random.Person p = random.NextPerson(Random.AllowedLanguage.FRENCH);
-                Author a = new Author() { Id = BaseUser.IdMax, Firstname = p.FirstName, Name = p.LastName };
-                BaseUser.IdMax++;
+                Author a = new Author() { Firstname = p.FirstName, Name = p.LastName };
                 dal.Add(a);
             }
         }
