@@ -17,17 +17,18 @@ namespace TP_Bibliotheque.Models.DAL
 
         public void Add(Author element)
         {
-            throw new NotImplementedException();
+            if (element != null)
+                this.Authors.Add(element);
         }
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            this.Authors.Remove(Read(id));
         }
 
         public void DeleteAll()
         {
-            throw new NotImplementedException();
+            this.Authors = new List<Author>();
         }
 
         public void Dispose()
@@ -42,12 +43,16 @@ namespace TP_Bibliotheque.Models.DAL
 
         public Author Read(int id)
         {
-            throw new NotImplementedException();
+            return this.Authors.Find(x => x.Id == id);
         }
 
         public void Update(int id, Author element)
         {
-            throw new NotImplementedException();
+            var itemIndex = this.Authors.FindIndex(x => x.Id == id);
+            var item = this.Authors.ElementAt(itemIndex);
+            this.Authors.RemoveAt(itemIndex);
+            item = element;
+            this.Authors.Insert(itemIndex, item);
         }
     }
 }

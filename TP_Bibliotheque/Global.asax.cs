@@ -24,30 +24,33 @@ namespace TP_Bibliotheque
         protected void Session_Start()
         {
             BaseUser.IdMax = 0;
-            
-            // Init Authors
-            List<Author> authors = new List<Author>();
-            Author author = new Author() { Id = BaseUser.IdMax, Firstname = "FirstName", Name = "Name" };
 
-            BaseUser.IdMax++;
-            authors.Add(author);
-            Session["Authors"] = authors;
+            // Init Authors
+            GenerateAuthors();
+
+            var dal = new AuthorDAL((List<Author>)Session["Authors"]);
+            dal.Delete(2);
+            dal.Update(3, new Author() { Id = 3, Firstname = "FirstName", Name = "Name" });
+
         }
 
-        /*
-        private void GenerateAuteurs()
+
+        private void GenerateAuthors()
         {
             var random = new Random();
 
-            var dal = new AuthorDAL();
+            Session["Authors"] = new List<Author>();
 
-            // on fabrique 100 livres au max
+            var dal = new AuthorDAL((List<Author>)Session["Authors"]);
+
+            // on fabrique 100 auteurs au max
             for (int i = 0; i < random.Next(10, 20); i++)
             {
                 Random.Person p = random.NextPerson(Random.AllowedLanguage.FRENCH);
                 Author a = new Author() { Id = BaseUser.IdMax, Firstname = p.FirstName, Name = p.LastName };
+                BaseUser.IdMax++;
                 dal.Add(a);
             }
-        }*/
+        }
     }
 }
