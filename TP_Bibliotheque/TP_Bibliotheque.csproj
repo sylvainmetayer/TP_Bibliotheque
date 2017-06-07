@@ -163,11 +163,19 @@
     <Compile Include="Models\AuthorModelView.cs" />
     <Compile Include="Models\BDDContext.cs" />
     <Compile Include="Models\BooksViewModel.cs" />
+    <Compile Include="Models\DAL\AuthorDAL.cs" />
     <Compile Include="Models\Data\Author.cs" />
     <Compile Include="Models\Data\BaseUser.cs" />
     <Compile Include="Models\Data\Book.cs" />
     <Compile Include="Models\Data\BooksBorrowing.cs" />
     <Compile Include="Models\Data\Member.cs" />
+    <Compile Include="Models\IDAL.cs" />
+    <Compile Include="Models\Random\Lorem.cs" />
+    <Compile Include="Models\Random\Password.cs" />
+    <Compile Include="Models\Random\Person.cs" />
+    <Compile Include="Models\Random\Random.cs" />
+    <Compile Include="Models\Random\String.cs" />
+    <Compile Include="Models\Random\Text.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -224,7 +232,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\DAL\" />
     <Folder Include="Views\Author\" />
   </ItemGroup>
   <ItemGroup>
