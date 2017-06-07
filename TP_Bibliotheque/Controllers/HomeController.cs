@@ -3,27 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TP_Bibliotheque.Models;
+using TP_Bibliotheque.Models.Data;
 
 namespace TP_Bibliotheque.Controllers
 {
     public class HomeController : Controller
     {
+        private AuthorModelView modelView;
+
         public ActionResult Index()
         {
+            // Variable de session pour la liste d'auteurs, livres, membres & emprunt.
+            modelView = new AuthorModelView((List<Author>)Session["Authors"]);
 
-            return View();
+            return View(modelView);
         }
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "A propos";
 
             return View();
         }

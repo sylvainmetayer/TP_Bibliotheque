@@ -8,13 +8,14 @@ namespace TP_Bibliotheque.Models.Data
 {
     public class BaseUser
     {
+        public static int IdMax { get; set; }
         [Required]
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Nom requis."), MinLength(5), MaxLength(80)]
-        public string Nom { get; set; }
+        public string Name { get; set; }
 
         [Required(ErrorMessage = "Prenom requis")]
-        public string Prenom { get; set; }
+        public string Firstname { get; set; }
     }
 }
