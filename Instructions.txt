@@ -1,0 +1,27 @@
+mail@christophe-gilbert.fr
+
+Date : Fin juillet
+Pensez à mettre tous les noms.
+
+TP Bibliothèque
+================
+
+Dans une application ASP MVC - Bootstrap
+
+* gérer une liste d'auteurs
+* gérer les livres des auteurs (attention plusieurs exemplaires)
+* gérer une liste de membres
+* gérer les emprunts, limités en nombre et en durée
+
+-> C#: interface, héritage, génériques...
+-> POCO + annotations
+-> DAL / CRUD
+-> Layout
+-> Helpers
+-> architecture générale MVC
+-> utilisation de view model
+-> respect du cahier des charges
+-> tests unitaires (sur le DAL en particulier)
+-> utilisation des conventions et propreté du code
+-> commentaires
+
