@@ -35,8 +35,37 @@ namespace TP_Bibliotheque
             dal.Delete(2);
             dal.Update(3, new Author() { Id = 3, Firstname = "FirstName", Name = "Name" });
 
+            GenerateBooks();
+
         }
 
+        private void GenerateBooks()
+        {
+
+            var random = new Random();
+            List<Author> authors = (List<Author>)Session["Authors"];
+            Session["Books"] = new List<Book>();
+
+            int nbAuthors = authors.Count;
+            DateTime startDate = new DateTime(1800, 01, 01);
+            DateTime endDate = new DateTime(2017,06,09);
+
+            var dal = new BookDAL((List<Book>)Session["Books"]);
+
+            for (int i = 0; i < random.Next(10, 20); i++)
+            {
+                String bookTitle = random.NextLoremIpsum(2);
+                DateTime date = random.NextDate(startDate, endDate);
+                String edition = random.NextString(8);
+                int quantity = random.Next(10);
+                String thematic = random.NextString(8);
+                var selectedIndexAuthor = random.Next(0, nbAuthors - 1);
+                Author selectedAuthor = authors.ElementAt(selectedIndexAuthor);
+
+                Book book = new Book() { Author = selectedAuthor, AvailableQuantity = quantity, Edition = edition, PublicationDate = date, Thematic = thematic, Title = bookTitle };
+                dal.Add(book);
+            }
+        }
 
         private void GenerateAuthors()
         {
@@ -46,7 +75,6 @@ namespace TP_Bibliotheque
 
             var dal = new AuthorDAL((List<Author>)Session["Authors"]);
 
-            // on fabrique 100 auteurs au max
             for (int i = 0; i < random.Next(10, 20); i++)
             {
                 Random.Person p = random.NextPerson(Random.AllowedLanguage.FRENCH);

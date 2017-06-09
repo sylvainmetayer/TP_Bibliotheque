@@ -156,13 +156,17 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AuthorController.cs" />
+    <Compile Include="Controllers\BookController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\BookModelView.cs" />
     <Compile Include="Models\AuthorModelView.cs" />
     <Compile Include="Models\BDDContext.cs" />
+    <Compile Include="Models\AddBookViewModel.cs" />
     <Compile Include="Models\BooksViewModel.cs" />
+    <Compile Include="Models\DAL\BookDAL.cs" />
     <Compile Include="Models\DAL\AuthorDAL.cs" />
     <Compile Include="Models\Data\Author.cs" />
     <Compile Include="Models\Data\BaseUser.cs" />
@@ -231,6 +235,8 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Author\Index.cshtml" />
     <Content Include="Views\Author\Add.cshtml" />
+    <Content Include="Views\Book\Index.cshtml" />
+    <Content Include="Views\Book\Add.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

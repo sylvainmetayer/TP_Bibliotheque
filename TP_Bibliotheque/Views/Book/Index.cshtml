@@ -1,0 +1,17 @@
+﻿@model TP_Bibliotheque.Models.BookModelView
+
+@{
+    ViewBag.Title = "Liste des livres.";
+}
+
+Liste des livres
+<ul>
+    @foreach (var book in @Model.GetBooks())
+    {
+        <li>
+            @book.Title [@book.Author.Name] (@book.AvailableQuantity)  @Html.ActionLink("Détails du livre", "Details", new { id = book.Id })  (TODO  edit / remove)
+        </li>
+    }
+
+    @Html.ActionLink("Add Livre", "Add");
+</ul>
