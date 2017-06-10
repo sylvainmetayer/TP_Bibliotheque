@@ -1,0 +1,18 @@
+﻿@model TP_Bibliotheque.Models.ViewModel.ShowAuthorModelView
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Livres de @Model.getAuthor().Firstname @Model.getAuthor().Name</h2>
+
+<p>Cet auteur a publié @Model.getAuthorBooks().Count livre(s)</p>
+
+<ul>
+    @foreach (var book in @Model.getAuthorBooks())
+    {
+        <li>
+            @book.Title [@book.PublicationDate] (@book.AvailableQuantity)
+        </li>
+    }
+</ul>

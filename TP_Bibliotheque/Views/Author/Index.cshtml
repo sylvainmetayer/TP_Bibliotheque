@@ -1,4 +1,4 @@
-﻿@model TP_Bibliotheque.Models.AuthorModelView
+﻿@model TP_Bibliotheque.Models.ViewModel.AuthorModelView
 
 @{
     ViewBag.Title = "Liste des auteurs.";
@@ -9,7 +9,7 @@ Liste des auteurs
     @foreach (var auteur in @Model.GetAuthors())
     {
         <li>
-            @auteur.Id , @auteur.Name , @auteur.Firstname (TODO  edit / remove)
+            @auteur.Name @auteur.Firstname @Html.ActionLink("Détails", "Details", new { id = auteur.Id})  (TODO  edit / remove)
         </li>
     }
 

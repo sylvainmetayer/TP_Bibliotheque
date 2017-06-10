@@ -6,7 +6,7 @@ using System.Web.Mvc;
 using System.Web.Mvc.Html;
 using TP_Bibliotheque.Models.Data;
 
-namespace TP_Bibliotheque.Models
+namespace TP_Bibliotheque.Models.ViewModel
 {
     public class AddBookViewModel
     {

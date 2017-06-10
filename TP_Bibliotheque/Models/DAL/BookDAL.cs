@@ -50,6 +50,11 @@ namespace TP_Bibliotheque.Models.DAL
             return this.Books.Find(x => x.Id == id);
         }
 
+        public List<Book> FindByAuthor(Author author)
+        {
+            return this.Books.FindAll(x => x.Author.Id == author.Id);
+        }
+
         public void Update(int id, Book element)
         {
             var itemIndex = this.Books.FindIndex(x => x.Id == id);

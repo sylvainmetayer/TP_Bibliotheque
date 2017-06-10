@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using TP_Bibliotheque.Models.Data;
 
-namespace TP_Bibliotheque.Models
+namespace TP_Bibliotheque.Models.ViewModel
 {
     public class AuthorModelView
     {

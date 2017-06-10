@@ -161,11 +161,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\BookModelView.cs" />
-    <Compile Include="Models\AuthorModelView.cs" />
+    <Compile Include="Models\ViewModel\BookModelView.cs" />
+    <Compile Include="Models\ViewModel\AuthorModelView.cs" />
     <Compile Include="Models\BDDContext.cs" />
-    <Compile Include="Models\AddBookViewModel.cs" />
-    <Compile Include="Models\BooksViewModel.cs" />
+    <Compile Include="Models\ViewModel\AddBookViewModel.cs" />
+    <Compile Include="Models\ViewModel\BooksViewModel.cs" />
     <Compile Include="Models\DAL\BookDAL.cs" />
     <Compile Include="Models\DAL\AuthorDAL.cs" />
     <Compile Include="Models\Data\Author.cs" />
@@ -180,6 +180,7 @@
     <Compile Include="Models\Random\Random.cs" />
     <Compile Include="Models\Random\String.cs" />
     <Compile Include="Models\Random\Text.cs" />
+    <Compile Include="Models\ViewModel\ShowAuthorModelView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -235,6 +236,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Author\Index.cshtml" />
     <Content Include="Views\Author\Add.cshtml" />
+    <Content Include="Views\Author\Details.cshtml" />
     <Content Include="Views\Book\Index.cshtml" />
     <Content Include="Views\Book\Add.cshtml" />
   </ItemGroup>

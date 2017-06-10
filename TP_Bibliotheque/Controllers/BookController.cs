@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using TP_Bibliotheque.Models;
 using TP_Bibliotheque.Models.DAL;
 using TP_Bibliotheque.Models.Data;
+using TP_Bibliotheque.Models.ViewModel;
 
 namespace TP_Bibliotheque.Controllers
 {
@@ -50,13 +51,11 @@ namespace TP_Bibliotheque.Controllers
             AuthorDAL authorDAL = new AuthorDAL((List<Author>)Session["Authors"]);
             List<Author> authors = authorDAL.GetAll();
             model.authors = GetSelectListItems(authors);
+            Author selectedAuthor = authorDAL.Read(model.authorSelected);
+            model.book.Author = selectedAuthor;
 
             if (ModelState.IsValid)
             {
-                Author selectedAuthor = authorDAL.Read(model.authorSelected);
-                // FIXME "La référence d'objet n'est pas définie à une instance d'un objet" .... NullPointerException sur selectedAuthor ><
-                // Il semblerait que l'erreur vienne du read du DAL (mais pas sur)
-                model.book.Author = selectedAuthor;
                 dal.Add(model.book);
                 return RedirectToAction("Index");
             }

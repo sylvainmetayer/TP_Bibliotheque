@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using TP_Bibliotheque.Models;
 using TP_Bibliotheque.Models.DAL;
 using TP_Bibliotheque.Models.Data;
+using TP_Bibliotheque.Models.ViewModel;
 
 namespace TP_Bibliotheque.Controllers
 {
@@ -26,6 +27,16 @@ namespace TP_Bibliotheque.Controllers
             modelView = new AuthorModelView((List<Author>)Session["Authors"]);
 
             return View(modelView);
+        }
+
+        public ActionResult Details(int id)
+        {
+            AuthorDAL authorDAL = new AuthorDAL((List<Author>)Session["Authors"]);
+            BookDAL bookDAL = new BookDAL((List<Book>)Session["Books"]);
+
+            Author author = authorDAL.Read(id);
+            ShowAuthorModelView model = new ShowAuthorModelView(author, bookDAL.FindByAuthor(author));
+            return View(model);
         }
 
         public ActionResult Add()
