@@ -6,21 +6,21 @@ using TP_Bibliotheque.Models.Data;
 
 namespace TP_Bibliotheque.Models.DAL
 {
-    public class BookDAL : IDal<Book>
+    public class MemberDAL : IDal<Member>
     {
-        private List<Book> Books;
+        private List<Member> Books;
 
-        public BookDAL(List<Book> books)
+        public MemberDAL(List<Member> members)
         {
-            this.Books = books;
+            this.Books = members;
         }
 
-        public void Add(Book element)
+        public void Add(Member element)
         {
             if (element != null)
             {
-                element.Id = BaseUser.IdMax;
-                BaseUser.IdMax++;
+                element.Id = Book.IdMax;
+                Book.IdMax++;
                 this.Books.Add(element);
             }
         }
@@ -32,7 +32,7 @@ namespace TP_Bibliotheque.Models.DAL
 
         public void DeleteAll()
         {
-            this.Books = new List<Book>();
+            this.Books = new List<Member>();
         }
 
         public void Dispose()
@@ -40,22 +40,17 @@ namespace TP_Bibliotheque.Models.DAL
             throw new NotImplementedException();
         }
 
-        public List<Book> GetAll()
+        public List<Member> GetAll()
         {
             return this.Books;
         }
 
-        public Book Read(int id)
+        public Member Read(int id)
         {
             return this.Books.Find(x => x.Id == id);
         }
 
-        public List<Book> FindByAuthor(Author author)
-        {
-            return this.Books.FindAll(x => x.Author.Id == author.Id);
-        }
-
-        public void Update(int id, Book element)
+        public void Update(int id, Member element)
         {
             var itemIndex = this.Books.FindIndex(x => x.Id == id);
             var item = this.Books.ElementAt(itemIndex);

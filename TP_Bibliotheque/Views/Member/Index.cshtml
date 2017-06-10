@@ -1,0 +1,17 @@
+﻿@model TP_Bibliotheque.Models.ViewModel.MembersModelView
+
+@{
+    ViewBag.Title = "Liste des membres enregistrés.";
+}
+
+Liste des membres
+<ul>
+    @foreach (var membre in @Model.GetMembers())
+    {
+        <li>
+            @membre.Name @membre.Firstname @Html.ActionLink("Détails", "Details", new { id = membre.Id })  (TODO  edit / remove)
+        </li>
+    }
+
+    @Html.ActionLink("Add member", "Add");
+</ul>

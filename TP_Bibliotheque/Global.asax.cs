@@ -36,6 +36,7 @@ namespace TP_Bibliotheque
             dal.Update(3, new Author() { Id = 3, Firstname = "FirstName", Name = "Name" });
 
             GenerateBooks();
+            GenerateMembers();
 
         }
 
@@ -48,7 +49,7 @@ namespace TP_Bibliotheque
 
             int nbAuthors = authors.Count;
             DateTime startDate = new DateTime(1800, 01, 01);
-            DateTime endDate = new DateTime(2017,06,09);
+            DateTime endDate = new DateTime(2017, 06, 09);
 
             var dal = new BookDAL((List<Book>)Session["Books"]);
 
@@ -80,6 +81,29 @@ namespace TP_Bibliotheque
                 Random.Person p = random.NextPerson(Random.AllowedLanguage.FRENCH);
                 Author a = new Author() { Firstname = p.FirstName, Name = p.LastName };
                 dal.Add(a);
+            }
+        }
+
+        private void GenerateMembers()
+        {
+            var random = new Random();
+
+            Session["Members"] = new List<Member>();
+
+            DateTime startDate = new DateTime(1800, 01, 01);
+            DateTime endDate = new DateTime(2017, 06, 09);
+
+            var dal = new MemberDAL((List<Member>)Session["Members"]);
+
+            for (int i = 0; i < random.Next(10, 20); i++)
+            {
+                String firstEmail = random.NextString(8);
+                String secondEmail = random.NextString(8);
+                String email = firstEmail + "@" + secondEmail + ".com";
+                DateTime date = random.NextDate(startDate, endDate);
+                Random.Person p = random.NextPerson(Random.AllowedLanguage.FRENCH);
+                Member m = new Member() { Name = p.LastName, Firstname = p.FirstName, Email = email, BirthDate = date };
+                dal.Add(m);
             }
         }
     }

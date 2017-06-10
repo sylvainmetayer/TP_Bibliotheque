@@ -158,9 +158,12 @@
     <Compile Include="Controllers\AuthorController.cs" />
     <Compile Include="Controllers\BookController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MemberController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\DAL\MemberDAL.cs" />
+    <Compile Include="Models\ViewModel\MembersModelView.cs" />
     <Compile Include="Models\ViewModel\BookModelView.cs" />
     <Compile Include="Models\ViewModel\AuthorModelView.cs" />
     <Compile Include="Models\BDDContext.cs" />
@@ -239,6 +242,7 @@
     <Content Include="Views\Author\Details.cshtml" />
     <Content Include="Views\Book\Index.cshtml" />
     <Content Include="Views\Book\Add.cshtml" />
+    <Content Include="Views\Member\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
