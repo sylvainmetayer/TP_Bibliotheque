@@ -1,0 +1,14 @@
+﻿@model TP_Bibliotheque.Models.ViewModel.ShowBookModelView
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Détails sur le Livre @Model.getBook().Title paru en @Model.getBook().PublicationDate</h2>
+
+<ul>
+    <li>Auteur : @Model.getBook().Author.Firstname @Model.getBook().Author.Name</li>
+    <li>Theme : @Model.getBook().Thematic</li>
+    <li>Edition : @Model.getBook().Edition</li>
+    <li>Quantité @Model.getBook().AvailableQuantity</li>
+</ul>

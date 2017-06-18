@@ -42,6 +42,15 @@ namespace TP_Bibliotheque.Controllers
             return View(model);
         }
 
+        public ActionResult Details(int id)
+        {
+            BookDAL bookDAL = new BookDAL((List<Book>)Session["Books"]);
+
+            Book book = bookDAL.Read(id);
+            ShowBookModelView model = new ShowBookModelView(book);
+            return View(model);
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "book, authorSelected")]AddBookViewModel model)

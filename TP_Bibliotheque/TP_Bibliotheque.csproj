@@ -183,6 +183,7 @@
     <Compile Include="Models\Random\Random.cs" />
     <Compile Include="Models\Random\String.cs" />
     <Compile Include="Models\Random\Text.cs" />
+    <Compile Include="Models\ViewModel\ShowBookModelView.cs" />
     <Compile Include="Models\ViewModel\ShowMemberModelView.cs" />
     <Compile Include="Models\ViewModel\ShowAuthorModelView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -246,6 +247,7 @@
     <Content Include="Views\Member\Index.cshtml" />
     <Content Include="Views\Member\Details.cshtml" />
     <Content Include="Views\Member\Add.cshtml" />
+    <Content Include="Views\Book\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
