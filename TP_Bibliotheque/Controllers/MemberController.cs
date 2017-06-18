@@ -18,5 +18,16 @@ namespace TP_Bibliotheque.Controllers
             var model = new MembersModelView(dal.GetAll());
             return View(model);
         }
+
+        public ActionResult Details(int id)
+        {
+            AuthorDAL authorDAL = new AuthorDAL((List<Author>)Session["Authors"]);
+            BookDAL bookDAL = new BookDAL((List<Book>)Session["Books"]);
+            MemberDAL memberDAL = new MemberDAL((List<Member>)Session["Members"]);
+
+            Member member = memberDAL.Read(id);
+            ShowMemberModelView model = new ShowMemberModelView(member);
+            return View(model);
+        }
     }
 }
