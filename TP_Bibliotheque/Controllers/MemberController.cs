@@ -29,5 +29,26 @@ namespace TP_Bibliotheque.Controllers
             ShowMemberModelView model = new ShowMemberModelView(member);
             return View(model);
         }
+
+        public ActionResult Add()
+        {
+            Member member = new Member();
+
+            return View(member);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "Name, Firstname, BirthDate, Email")]Member member)
+        {
+            MemberDAL dal = new MemberDAL((List<Member>)Session["Members"]);
+            if (ModelState.IsValid)
+            {
+                dal.Add(member);
+                return RedirectToAction("Index");
+            }
+
+            return View(member);
+        }
     }
 }
