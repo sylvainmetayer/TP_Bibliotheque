@@ -10,7 +10,8 @@
     @foreach (var auteur in @Model.GetAuthors())
     {
         <li>
-            @auteur.Name @auteur.Firstname @Html.ActionLink("Details", "Details", new { id = auteur.Id})  (TODO  edit / remove)
+            @auteur.Name @auteur.Firstname id = @auteur.Id @Html.ActionLink("Details", "Details", new { id = auteur.Id}) <br />
+            @Html.ActionLink("Edit the author","Edit", new { id = auteur.Id }) (TODO  edit / remove)
         </li>
     }
 

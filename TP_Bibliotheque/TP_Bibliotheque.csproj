@@ -166,6 +166,7 @@
     <Compile Include="Models\DAL\ReservationDAL.cs" />
     <Compile Include="Models\DAL\MemberDAL.cs" />
     <Compile Include="Models\ViewModel\AddResaViewModel.cs" />
+    <Compile Include="Models\ViewModel\EditAuthorModelView .cs" />
     <Compile Include="Models\ViewModel\EditBookModelView.cs" />
     <Compile Include="Models\ViewModel\MembersModelView.cs" />
     <Compile Include="Models\ViewModel\BookModelView.cs" />
@@ -256,6 +257,7 @@
     <Content Include="Views\Reservation\Index.cshtml" />
     <Content Include="Views\Reservation\Add.cshtml" />
     <Content Include="Views\Book\Edit.cshtml" />
+    <Content Include="Views\Author\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

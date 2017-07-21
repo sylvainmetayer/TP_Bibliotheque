@@ -37,6 +37,16 @@ namespace TP_Bibliotheque.Controllers
             return View(model);
         }
 
+        public ActionResult Edit(int id)
+        {
+            AuthorDAL authorDAL = new AuthorDAL((List<Author>)Session["Authors"]);
+
+            Author author = authorDAL.Read(id);
+            var model = new EditAuthorModelView();
+            model.author = author;
+            return View(model);
+        }
+
         public ActionResult Add()
         {
             Author author = new Author();
@@ -57,5 +67,21 @@ namespace TP_Bibliotheque.Controllers
 
             return View(author);
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edition([Bind(Include = "author")]EditAuthorModelView model)
+        {
+            AuthorDAL dal = new AuthorDAL((List<Author>)Session["Authors"]);
+            if (ModelState.IsValid)
+            {
+                dal.Update(model.author.Id, model.author);
+                return RedirectToAction("Index");
+            }
+
+            return View("Edit", model);
+        }
+
+
     }
 }
