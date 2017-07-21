@@ -4,14 +4,14 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Détails sur le Membre @Model.getMember().Firstname @Model.getMember().Name</h2>
+<h2>Details about @Model.getMember().Firstname @Model.getMember().Name</h2>
 
 <p>
     Email : @Model.getMember().Email
 </p>
 
 <p>
-    Date de naissance : @Model.getMember().BirthDate
+    Birthdate : @Model.getMember().BirthDate.ToLongDateString()
 </p>
 
 @if (Model.GetReservations().Count <= 0)
@@ -22,7 +22,7 @@
 @foreach (var resa in @Model.GetReservations())
 {
     <li>
-        @resa.user.Name borrowed @resa.book.Title on @resa.beginDate. <br />
+        @resa.user.Name borrowed "@resa.book.Title" on @resa.beginDate.ToLongDateString() <br />
 
         @if (resa.isReturned)
         {
@@ -30,7 +30,7 @@
         }
         else
         {
-            <p>This book has not been returned yet. Limit date @resa.returnDate</p>
+            <p>This book has not been returned yet. Limit date @resa.returnDate.</p>
         }
 
         @if (resa.daysRetard > 0)

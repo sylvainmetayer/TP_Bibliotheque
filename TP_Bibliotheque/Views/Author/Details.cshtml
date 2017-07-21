@@ -4,15 +4,15 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Livres de @Model.getAuthor().Firstname @Model.getAuthor().Name</h2>
+<h2>Books written by @Model.getAuthor().Firstname @Model.getAuthor().Name</h2>
 
-<p>Cet auteur a publié @Model.getAuthorBooks().Count livre(s)</p>
+<p>This author published @Model.getAuthorBooks().Count book(s)</p>
 
 <ul>
     @foreach (var book in @Model.getAuthorBooks())
     {
         <li>
-            @book.Title [@book.PublicationDate] (@book.AvailableQuantity)
+            @book.Title [@book.PublicationDate.ToLongDateString()] (@book.AvailableQuantity)
         </li>
     }
 </ul>

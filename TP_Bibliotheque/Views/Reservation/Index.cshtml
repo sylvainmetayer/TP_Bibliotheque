@@ -4,12 +4,13 @@
     ViewBag.Title = "Liste des reservations.";
 }
 
-Liste des réservations
+<h1>Books that have been borrowed</h1>
+
 <ul>
     @foreach (var resa in @Model.GetReservations())
     {
         <li>
-            "@resa.user.Name @resa.user.Firstname" borrowed @resa.book.Title (By @resa.book.Author.Name - Edition: @resa.book.Edition) on @resa.beginDate. <br />
+            "@resa.user.Name @resa.user.Firstname" borrowed @resa.book.Title (By @resa.book.Author.Name - Edition: @resa.book.Edition) on @resa.beginDate.ToLongDateString() <br />
 
             @if (resa.isReturned)
             {
@@ -20,9 +21,9 @@ Liste des réservations
                 <p>This book has not been returned yet. Limit date @resa.returnDate</p>
             }
 
-            @if(resa.daysRetard > 0)
+            @if (resa.daysRetard > 0)
             {
-                <p>This member should have returned this book since @resa.daysRetard days  </p>
+                <p><strong>This member should have returned this book since @resa.daysRetard days  </strong></p>
             }
 
         </li>

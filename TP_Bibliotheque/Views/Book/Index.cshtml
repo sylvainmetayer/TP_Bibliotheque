@@ -4,14 +4,15 @@
     ViewBag.Title = "Liste des livres.";
 }
 
-Liste des livres
+<h1>Books' list</h1>
+
 <ul>
     @foreach (var book in @Model.GetBooks())
     {
         <li>
-            @book.Title [@book.Author.Name] (@book.AvailableQuantity)  @Html.ActionLink("Détails du livre", "Details", new { id = book.Id })  (TODO  edit / remove)
+            @book.Title [@book.Author.Name] (@book.AvailableQuantity)  @Html.ActionLink("More on this book", "Details", new { id = book.Id })  (TODO  edit / remove)
         </li>
     }
 
-    @Html.ActionLink("Add Livre", "Add");
+    @Html.ActionLink("Add Book", "Add");
 </ul>

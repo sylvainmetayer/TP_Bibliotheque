@@ -11,14 +11,9 @@ namespace TP_Bibliotheque.Controllers
 {
     public class HomeController : Controller
     {
-        private AuthorModelView modelView;
-
         public ActionResult Index()
         {
-            // Variable de session pour la liste d'auteurs, livres, membres & emprunt.
-            modelView = new AuthorModelView((List<Author>)Session["Authors"]);
-
-            return View(modelView);
+            return View();
         }
 
         public ActionResult About()

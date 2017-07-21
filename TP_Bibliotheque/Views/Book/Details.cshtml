@@ -4,11 +4,11 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Détails sur le Livre @Model.getBook().Title paru en @Model.getBook().PublicationDate</h2>
+<h2>Details about this book : @Model.getBook().Title published in @Model.getBook().PublicationDate.ToLongDateString()</h2>
 
 <ul>
-    <li>Auteur : @Model.getBook().Author.Firstname @Model.getBook().Author.Name</li>
-    <li>Theme : @Model.getBook().Thematic</li>
+    <li>Author : @Model.getBook().Author.Firstname @Model.getBook().Author.Name</li>
+    <li>Thematic : @Model.getBook().Thematic</li>
     <li>Edition : @Model.getBook().Edition</li>
-    <li>Quantité @Model.getBook().AvailableQuantity</li>
+    <li>Quantity : @Model.getBook().AvailableQuantity</li>
 </ul>

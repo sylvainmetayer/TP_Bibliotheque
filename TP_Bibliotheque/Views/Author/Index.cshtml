@@ -4,12 +4,13 @@
     ViewBag.Title = "Liste des auteurs.";
 }
 
-Liste des auteurs
+<h1>Authors' list</h1>
+
 <ul>
     @foreach (var auteur in @Model.GetAuthors())
     {
         <li>
-            @auteur.Name @auteur.Firstname @Html.ActionLink("Détails", "Details", new { id = auteur.Id})  (TODO  edit / remove)
+            @auteur.Name @auteur.Firstname @Html.ActionLink("Details", "Details", new { id = auteur.Id})  (TODO  edit / remove)
         </li>
     }
 
