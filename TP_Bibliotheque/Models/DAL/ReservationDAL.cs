@@ -20,6 +20,22 @@ namespace TP_Bibliotheque.Models.DAL
             if (element != null)
             {
                 element.Id = BooksBorrowing.IdMax;
+
+                element.beginDate = DateTime.Now;
+
+                if (element.returnDate != null)
+                {
+                    // Return date has already be defined, it's the generation of fake data.
+                    // Do nothing in this case.
+                }
+                else
+                {
+                    DateTime now = DateTime.Now;
+                    element.returnDate = now.AddDays(10);
+                    element.isReturned = false;
+                    element.daysRetard = 0;
+                }
+
                 BooksBorrowing.IdMax++;
                 this.Reservations.Add(element);
             }
@@ -38,6 +54,21 @@ namespace TP_Bibliotheque.Models.DAL
         public void Dispose()
         {
             throw new NotImplementedException();
+        }
+
+        internal List<BooksBorrowing> GetByMember(Member member)
+        {
+
+            List<BooksBorrowing> result = new List<BooksBorrowing>();
+            foreach (BooksBorrowing resa in this.Reservations)
+            {
+                if (resa.user == member)
+                {
+                    result.Add(resa);
+                }
+            }
+
+            return result;
         }
 
         public List<BooksBorrowing> GetAll()

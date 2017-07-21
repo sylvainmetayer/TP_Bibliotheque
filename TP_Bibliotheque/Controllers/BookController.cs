@@ -12,11 +12,6 @@ namespace TP_Bibliotheque.Controllers
 {
     public class BookController : Controller
     {
-
-        private BookModelView modelView;
-        private BookDAL dal;
-        private AuthorDAL authorDAL;
-
         public BookController()
         {
             // TODO Find a way to instanciate this, because it's easier to use than instanciate on the fly in methods
@@ -26,7 +21,7 @@ namespace TP_Bibliotheque.Controllers
         // GET: Book
         public ActionResult Index()
         {
-            modelView = new BookModelView((List<Book>)Session["Books"]);
+            BookModelView modelView = new BookModelView((List<Book>)Session["Books"]);
 
             return View(modelView);
         }

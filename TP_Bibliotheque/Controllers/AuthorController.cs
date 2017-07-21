@@ -12,8 +12,6 @@ namespace TP_Bibliotheque.Controllers
 {
     public class AuthorController : Controller
     {
-        private AuthorModelView modelView;
-        private AuthorDAL dal;
 
         public AuthorController()
         {
@@ -24,7 +22,7 @@ namespace TP_Bibliotheque.Controllers
         // GET: Author
         public ActionResult Index()
         {
-            modelView = new AuthorModelView((List<Author>)Session["Authors"]);
+            AuthorModelView modelView = new AuthorModelView((List<Author>)Session["Authors"]);
 
             return View(modelView);
         }

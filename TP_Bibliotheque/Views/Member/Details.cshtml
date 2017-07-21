@@ -14,4 +14,29 @@
     Date de naissance : @Model.getMember().BirthDate
 </p>
 
-TODO : Lister les réservations de cet utilisateur.
+@if (Model.GetReservations().Count <= 0)
+{
+    <p>This user hasn't borrowed any book yet.</p>
+}
+
+@foreach (var resa in @Model.GetReservations())
+{
+    <li>
+        @resa.user.Name borrowed @resa.book.Title on @resa.beginDate. <br />
+
+        @if (resa.isReturned)
+        {
+            <p>This book has been returned.</p>
+        }
+        else
+        {
+            <p>This book has not been returned yet. Limit date @resa.returnDate</p>
+        }
+
+        @if (resa.daysRetard > 0)
+        {
+            <p>This member should have returned this book since @resa.daysRetard days  </p>
+        }
+
+    </li>
+}

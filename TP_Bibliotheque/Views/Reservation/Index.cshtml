@@ -9,7 +9,7 @@ Liste des réservations
     @foreach (var resa in @Model.GetReservations())
     {
         <li>
-            @resa.user.Name borrowed @resa.book.Title on @resa.beginDate. <br />
+            "@resa.user.Name @resa.user.Firstname" borrowed @resa.book.Title (By @resa.book.Author.Name - Edition: @resa.book.Edition) on @resa.beginDate. <br />
 
             @if (resa.isReturned)
             {

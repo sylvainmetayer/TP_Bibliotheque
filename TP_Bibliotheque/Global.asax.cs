@@ -64,7 +64,7 @@ namespace TP_Bibliotheque
             resa.book = books.ElementAt(1);
             resa.user = members.ElementAt(1);
             resa.returnDate = new DateTime(2017, 07, 15);
-            resa.daysRetard = (int)(DateTime.Now - resa.returnDate).TotalDays;
+            resa.daysRetard = (int)(DateTime.Now - (DateTime)resa.returnDate).TotalDays;
             dalResa.Add(resa);
 
             // Is returned

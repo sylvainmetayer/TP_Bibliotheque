@@ -10,6 +10,8 @@ namespace TP_Bibliotheque.Models.ViewModel
     {
         private Member Member;
 
+        public List<BooksBorrowing> Reservations { get; set; }
+
         public ShowMemberModelView(Member member)
         {
             this.Member = member;
@@ -18,6 +20,11 @@ namespace TP_Bibliotheque.Models.ViewModel
         public Member getMember()
         {
             return this.Member;
+        }
+
+        public List<BooksBorrowing> GetReservations()
+        {
+            return this.Reservations;
         }
     }
 }

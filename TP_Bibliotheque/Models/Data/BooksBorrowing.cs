@@ -9,7 +9,7 @@ namespace TP_Bibliotheque.Models.Data
         [Required]
         public int Id { get; set; }
         public DateTime beginDate { get; set; }
-        public DateTime returnDate { get; set; }
+        public DateTime? returnDate { get; set; }
         public Member user { get; set; }
         public Book book { get; set; }
         public Boolean isReturned { get; set; }

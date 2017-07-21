@@ -25,8 +25,12 @@ namespace TP_Bibliotheque.Controllers
             BookDAL bookDAL = new BookDAL((List<Book>)Session["Books"]);
             MemberDAL memberDAL = new MemberDAL((List<Member>)Session["Members"]);
 
+            ReservationDAL resaDAL = new ReservationDAL((List<BooksBorrowing>)Session["BooksBorrowing"]);
+
             Member member = memberDAL.Read(id);
             ShowMemberModelView model = new ShowMemberModelView(member);
+            model.Reservations = resaDAL.GetByMember(member);
+
             return View(model);
         }
 
@@ -48,7 +52,7 @@ namespace TP_Bibliotheque.Controllers
                 return RedirectToAction("Index");
             }
 
-            return View(member);
+            return RedirectToAction("Add");
         }
     }
 }

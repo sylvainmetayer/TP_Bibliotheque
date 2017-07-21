@@ -1,7 +1,66 @@
-﻿
+﻿@model TP_Bibliotheque.Models.ViewModel.AddResaViewModel
 @{
-    ViewBag.Title = "Add";
+    ViewBag.Title = "Create Resa";
 }
 
-<h2>Add</h2>
+<h2>Create Resa</h2>
 
+@using (Html.BeginForm("Create", "Reservation", "POST"))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>New reservation</h4>
+        <hr />
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.bookSelected)
+            @Html.DropDownListFor(model => model.bookSelected, // 1. Store selected value in Model.State;
+                                                               // when page is rendered after postback,
+                                                               // take selected value from Model.State.
+
+                                              // 2. Take list of values from Model.States
+                                              Model.books,
+
+                                              // 3. Text for the first 'default' option
+                                              "- Please select a book -",
+
+                                              //4. A class name to assign to <select> tag
+                                              new { @class = "form-control" })
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.memberSelected)
+            @Html.DropDownListFor(model => model.memberSelected, // 1. Store selected value in Model.State;
+                                                               // when page is rendered after postback,
+                                                               // take selected value from Model.State.
+
+                                              // 2. Take list of values from Model.States
+                                              Model.members,
+
+                                              // 3. Text for the first 'default' option
+                                              "- Please select a member -",
+
+                                              //4. A class name to assign to <select> tag
+                                              new { @class = "form-control" })
+        </div>
+
+
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
