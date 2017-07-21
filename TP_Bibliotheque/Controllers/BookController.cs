@@ -36,6 +36,22 @@ namespace TP_Bibliotheque.Controllers
             model.book = new Book();
             return View(model);
         }
+        
+        public ActionResult Edit(int id)
+        {
+            AuthorDAL authorDAL = new AuthorDAL((List<Author>)Session["Authors"]);
+            List<Author> authors = authorDAL.GetAll();
+
+            BookDAL bookDAL = new BookDAL((List<Book>)Session["Books"]);
+            Book book = bookDAL.Read(id);
+            bookDAL.Update(id, book);
+
+            var model = new EditBookModelView();
+            model.book = book;
+            model.authors = GetSelectListItems(authors);
+            return View(model);
+        }
+
 
         public ActionResult Details(int id)
         {
@@ -65,6 +81,28 @@ namespace TP_Bibliotheque.Controllers
             }
 
             return View("Add", model);
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edition( [Bind(Include = "book, authorSelected")]EditBookModelView model)
+        {
+            BookDAL dal = new BookDAL((List<Book>)Session["Books"]);
+
+            AuthorDAL authorDAL = new AuthorDAL((List<Author>)Session["Authors"]);
+            List<Author> authors = authorDAL.GetAll();
+            model.authors = GetSelectListItems(authors);
+            Author selectedAuthor = authorDAL.Read(model.authorSelected);
+            model.book.Author = selectedAuthor;
+
+            if (ModelState.IsValid)
+            {
+                dal.Update(model.book.Id, model.book);
+                return RedirectToAction("Index");
+            }
+
+            return View("Edit", model);
         }
 
         // FROM http://nimblegecko.com/using-simple-drop-down-lists-in-ASP-NET-MVC/
