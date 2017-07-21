@@ -10,9 +10,9 @@ namespace TP_Bibliotheque.Models.ViewModel
     {
         private Book Book;
 
-        public ShowBookModelView(Book member)
+        public ShowBookModelView(Book book)
         {
-            this.Book = member;
+            this.Book = book;
         }
 
         public Book getBook()

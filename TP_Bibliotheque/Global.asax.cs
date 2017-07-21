@@ -38,6 +38,44 @@ namespace TP_Bibliotheque
             GenerateBooks();
             GenerateMembers();
 
+            Session["BooksBorrowing"] = new List<BooksBorrowing>();
+
+
+
+            // Create test BooksBorrowing
+            List<Author> authors = (List<Author>)Session["Authors"];
+            List<Member> members = (List<Member>)Session["Members"];
+            List<Book> books = (List<Book>)Session["Books"];
+            var dalResa = new ReservationDAL((List<BooksBorrowing>)Session["BooksBorrowing"]);
+
+            // Books classic
+            BooksBorrowing resa = new BooksBorrowing();
+            resa.beginDate = new DateTime();
+            resa.isReturned = false;
+            resa.book = books.ElementAt(0);
+            resa.user = members.ElementAt(0);
+            resa.returnDate = new DateTime(2017, 08, 31);
+            dalResa.Add(resa);
+
+            // Return date 
+            resa = new BooksBorrowing();
+            resa.beginDate = new DateTime(2017, 07, 01);
+            resa.isReturned = false;
+            resa.book = books.ElementAt(1);
+            resa.user = members.ElementAt(1);
+            resa.returnDate = new DateTime(2017, 07, 15);
+            resa.daysRetard = (int)(DateTime.Now - resa.returnDate).TotalDays;
+            dalResa.Add(resa);
+
+            // Is returned
+            resa = new BooksBorrowing();
+            resa.beginDate = new DateTime(2017, 07, 15);
+            resa.book = books.ElementAt(2);
+            resa.user = members.ElementAt(2);
+            resa.isReturned = true;
+            resa.returnDate = new DateTime(2017, 07, 17);
+            dalResa.Add(resa);
+
         }
 
         private void GenerateBooks()
