@@ -11,14 +11,8 @@ namespace TP_Bibliotheque.Models.ViewModel
     public class EditAuthorModelView
     {
         private List<Author> Authors;
-        public Author author { get; set; }
+        public Author author { get; set; } // Pour récupérer l'entité de l'auteur
         public int id;
-        /*
-        public EditAuthorModelView(List<Author> authors)
-        {
-            this.Authors = authors;
-        }
-        */
 
         public List<Author> GetAuthors()
         {

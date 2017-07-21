@@ -26,8 +26,9 @@ namespace TP_Bibliotheque.Controllers
             return View(modelView);
         }
 
-        public ActionResult Add()
+        public ActionResult Add() // Pour l'ajout d'un nouveau livre
         {
+            // Récupération des informations sur l'auteur via le form + ajout au model
             AuthorDAL authorDAL = new AuthorDAL((List<Author>)Session["Authors"]);
             List<Author> authors = authorDAL.GetAll();
 
@@ -37,72 +38,92 @@ namespace TP_Bibliotheque.Controllers
             return View(model);
         }
         
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int id) // Pour l'édition d'un livre
         {
+            // Récupération des infos sur l'auteur
             AuthorDAL authorDAL = new AuthorDAL((List<Author>)Session["Authors"]);
             List<Author> authors = authorDAL.GetAll();
 
+            // Récupération des infos sur le livre
             BookDAL bookDAL = new BookDAL((List<Book>)Session["Books"]);
             Book book = bookDAL.Read(id);
-            bookDAL.Update(id, book);
 
+            bookDAL.Update(id, book); // MAJ du livre
+
+            //Données mises à jour renvoyées dans la vue
             var model = new EditBookModelView();
             model.book = book;
             model.authors = GetSelectListItems(authors);
+
+            // Données retournée à la vue
             return View(model);
         }
 
 
-        public ActionResult Details(int id)
+        public ActionResult Details(int id) // Affichage des informations d'un livre
         {
             BookDAL bookDAL = new BookDAL((List<Book>)Session["Books"]);
 
-            Book book = bookDAL.Read(id);
+            Book book = bookDAL.Read(id); // R2cupération des infos d'un livre pour un id donné
             ShowBookModelView model = new ShowBookModelView(book);
             return View(model);
         }
 
+        public ActionResult Delete(int id) // Affichage des informations d'un livre
+        {
+            BookDAL bookDAL = new BookDAL((List<Book>)Session["Books"]);
+
+            Book book = bookDAL.Read(id); // R2cupération des infos d'un livre pour un id donné
+            bookDAL.Delete(id);
+
+            BookModelView model = new BookModelView((List<Book>)Session["Books"]);
+            return View(model);
+        }
+
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken] // Création d'un livre à partir d'infos récupéré via un form
         public ActionResult Create([Bind(Include = "book, authorSelected")]AddBookViewModel model)
         {
+            // Récupération des datas
             BookDAL dal = new BookDAL((List<Book>)Session["Books"]);
-
             AuthorDAL authorDAL = new AuthorDAL((List<Author>)Session["Authors"]);
+
             List<Author> authors = authorDAL.GetAll();
-            model.authors = GetSelectListItems(authors);
+
+            model.authors = GetSelectListItems(authors); // Récupération de l'auteur
             Author selectedAuthor = authorDAL.Read(model.authorSelected);
-            model.book.Author = selectedAuthor;
+            model.book.Author = selectedAuthor; // Ajout de l'auteur au model
 
             if (ModelState.IsValid)
             {
-                dal.Add(model.book);
-                return RedirectToAction("Index");
+                dal.Add(model.book); // Ajout du livre
+                return RedirectToAction("Index"); // Si tout se passe bien, afficher liste livre
             }
 
-            return View("Add", model);
+            return View("Add", model); // Si erreur, laissez la view d'ajout
         }
 
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken] // Pour l'édition d'un livre
         public ActionResult Edition( [Bind(Include = "book, authorSelected")]EditBookModelView model)
         {
+            // Récupération des datas
             BookDAL dal = new BookDAL((List<Book>)Session["Books"]);
-
             AuthorDAL authorDAL = new AuthorDAL((List<Author>)Session["Authors"]);
             List<Author> authors = authorDAL.GetAll();
+
             model.authors = GetSelectListItems(authors);
             Author selectedAuthor = authorDAL.Read(model.authorSelected);
-            model.book.Author = selectedAuthor;
+            model.book.Author = selectedAuthor;  // Attribuer l'auteur
 
             if (ModelState.IsValid)
             {
-                dal.Update(model.book.Id, model.book);
-                return RedirectToAction("Index");
+                dal.Update(model.book.Id, model.book); // Mise à jour des datas du livres
+                return RedirectToAction("Index"); // Si déroulement OK, retour à la liste de livres
             }
 
-            return View("Edit", model);
+            return View("Edit", model); // Si erreur, on reste sur le formulaire d'edition
         }
 
         // FROM http://nimblegecko.com/using-simple-drop-down-lists-in-ASP-NET-MVC/

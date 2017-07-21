@@ -7,10 +7,11 @@
 <h1>Members' list</h1>
 
 <ul>
-    @foreach (var membre in @Model.GetMembers())
+    @foreach (var membre in @Model.GetMembers()) // Parcours de la liste de tous les membres 
     {
         <li>
-            @membre.Name @membre.Firstname @Html.ActionLink("Détails", "Details", new { id = membre.Id })  (TODO  edit / remove)
+            @membre.Name @membre.Firstname @Html.ActionLink("Détails", "Details", new { id = membre.Id }) <br />
+            @Html.ActionLink("Edit the member", "Edit", new { id = membre.Id }) (TODO  edit / remove)
         </li>
     }
 

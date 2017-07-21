@@ -10,9 +10,9 @@ namespace TP_Bibliotheque.Models.ViewModel
 {
     public class EditBookModelView
     {
-        public Book book { get; set; }
+        public Book book { get; set; } // Pour récupérer l'entité du livre
         private Book BookUse;
-        public int authorSelected { get; set; }
+        public int authorSelected { get; set; } // Pour récupérer l'auteur du livre
         public IEnumerable<SelectListItem> authors { get; set; }
         public int id;
 
