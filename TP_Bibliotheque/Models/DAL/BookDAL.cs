@@ -45,6 +45,11 @@ namespace TP_Bibliotheque.Models.DAL
             return this.Books;
         }
 
+        internal List<Book> GetAvailableBooks()
+        {
+            return this.Books.FindAll(x => x.AvailableQuantity > 0);
+        }
+
         public Book Read(int id)
         {
             return this.Books.Find(x => x.Id == id);

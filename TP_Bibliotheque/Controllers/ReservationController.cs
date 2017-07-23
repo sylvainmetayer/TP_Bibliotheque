@@ -13,17 +13,11 @@ namespace TP_Bibliotheque.Controllers
     public class ReservationController : Controller
     {
 
-        public ReservationController()
-        {
-            // TODO Find a way to instanciate this, because it's easier to use than instanciate on the fly in methods
-            //dal = new AuthorDAL((List<Author>)Session["Authors"]);
-        }
+        public ReservationController() { }
 
-        // GET: Reservation
         public ActionResult Index()
         {
             ReservationModelView modelView = new ReservationModelView((List<BooksBorrowing>)Session["BooksBorrowing"]);
-
             return View(modelView);
         }
 
@@ -33,7 +27,7 @@ namespace TP_Bibliotheque.Controllers
             List<Member> members = memberDAL.GetAll();
 
             BookDAL bookDAL = new BookDAL((List<Book>)Session["Books"]);
-            List<Book> books = bookDAL.GetAll();
+            List<Book> books = bookDAL.GetAvailableBooks();
 
             var model = new AddResaViewModel();
             model.members = GetSelectListItemsMember(members);
@@ -61,6 +55,9 @@ namespace TP_Bibliotheque.Controllers
 
             Book selectedBook = bookDAL.Read(model.bookSelected);
             model.resa.book = selectedBook;
+
+            selectedBook.AvailableQuantity -= 1;
+            bookDAL.Update(selectedBook.Id, selectedBook);
 
             Member selectedMember = memberDAL.Read(model.memberSelected);
             model.resa.user = selectedMember;
