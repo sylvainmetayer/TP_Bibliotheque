@@ -22,21 +22,22 @@
 @foreach (var resa in @Model.GetReservations())
 {
     <li>
-        @resa.user.Name borrowed "@resa.book.Title" on @resa.beginDate.ToLongDateString() <br />
+        "@resa.user.Name @resa.user.Firstname" borrowed @resa.book.Title (By @resa.book.Author.Name - Edition: @resa.book.Edition) on @resa.beginDate.ToLongDateString() <br />
 
         @if (resa.isReturned)
         {
-            <p>This book has been returned.</p>
+            <p>This book has been returned on @resa.returnDate.</p>
         }
         else
         {
-            <p>This book has not been returned yet. Limit date @resa.returnDate.</p>
+            <p>This book has not been returned yet. Limit date @resa.returnDate</p>
+                @Html.ActionLink("Return this book", "Return", new { id = resa.Id })
         }
 
-        @if (resa.daysRetard > 0)
+        @if (resa.daysRetard > 0 && !resa.isReturned)
         {
-            <p>This member should have returned this book since @resa.daysRetard days  </p>
+            <p><strong>This member should have returned this book since @resa.daysRetard days  </strong></p>
         }
-
+        <hr />
     </li>
 }

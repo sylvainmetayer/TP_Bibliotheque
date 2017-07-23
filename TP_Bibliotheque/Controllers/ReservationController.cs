@@ -21,6 +21,18 @@ namespace TP_Bibliotheque.Controllers
             return View(modelView);
         }
 
+        public ActionResult Return(int Id)
+        {
+            ReservationDAL dal = new ReservationDAL((List<BooksBorrowing>)Session["BooksBorrowing"]);
+
+            BooksBorrowing resa = dal.Read(Id);
+
+            resa.isReturned = true;
+            dal.Update(resa.Id, resa);
+
+            return RedirectToAction("Index");
+        }
+
         public ActionResult Add()
         {
             MemberDAL memberDAL = new MemberDAL((List<Member>)Session["Members"]);
