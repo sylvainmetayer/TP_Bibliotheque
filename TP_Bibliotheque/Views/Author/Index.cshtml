@@ -1,17 +1,20 @@
 ﻿@model TP_Bibliotheque.Models.ViewModel.AuthorModelView
 
 @{
-    ViewBag.Title = "Liste des auteurs.";
+    ViewBag.Title = "List of authors";
 }
 
 <h1>Authors' list</h1>
+
+<p> To delete an author, please go to the details page of the author. <br />
+    You can only delete an author who has not wrote books.</p>
 
 <ul>
     @foreach (var auteur in @Model.GetAuthors())
     {
         <li>
             @auteur.Name @auteur.Firstname id = @auteur.Id @Html.ActionLink("Details", "Details", new { id = auteur.Id}) <br />
-            @Html.ActionLink("Edit the author","Edit", new { id = auteur.Id }) (TODO  edit / remove)
+            @Html.ActionLink("Edit the author","Edit", new { id = auteur.Id }) 
         </li>
     }
 

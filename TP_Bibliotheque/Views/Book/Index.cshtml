@@ -1,7 +1,7 @@
 ﻿@model TP_Bibliotheque.Models.ViewModel.BookModelView
 
 @{
-    ViewBag.Title = "Liste des livres.";
+    ViewBag.Title = "Books liste";
 }
 
 <h1>Books' list</h1>
@@ -11,7 +11,7 @@
     {
         <li>
             @book.Title [@book.Author.Name] (@book.AvailableQuantity)  @Html.ActionLink("More on this book", "Details", new { id = book.Id }) <br />
-                @Html.ActionLink("Edit this book", "Edit", new { id = book.Id }) @Html.ActionLink("Delete this book", "Delete", new { id = book.Id })  (TODO  edit / remove)
+                @Html.ActionLink("Edit this book", "Edit", new { id = book.Id }) / @Html.ActionLink("Delete this book", "Delete", new { id = book.Id })  (TODO  edit / remove)
         </li>
     }
 

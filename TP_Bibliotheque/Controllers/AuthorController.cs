@@ -50,6 +50,17 @@ namespace TP_Bibliotheque.Controllers
             return View(model);
         }
 
+        public ActionResult Delete(int id) // Suppression d'un auteur
+        {
+            AuthorDAL authorDAL = new AuthorDAL((List<Author>)Session["Authors"]);
+
+            Author author = authorDAL.Read(id); // R2cupération des infos d'un livre pour un id donné
+            authorDAL.Delete(id);
+
+            AuthorModelView model = new AuthorModelView((List<Author>)Session["Authors"]);
+            return View(model);
+        }
+
         public ActionResult Add() // Ajout d'un nouvel auteur
         {
             Author author = new Author();

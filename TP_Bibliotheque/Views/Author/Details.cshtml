@@ -8,11 +8,18 @@
 
 <p>This author published @Model.getAuthorBooks().Count book(s)</p>
 
+
+
+@if (@Model.getAuthorBooks().Count == 0)
+{
+      @Html.ActionLink("Delete this author", "Delete", new { id = Model.getAuthor().Id })
+}
+
 <ul>
     @foreach (var book in @Model.getAuthorBooks())
     {
         <li>
-            @book.Title [@book.PublicationDate.ToLongDateString()] (@book.AvailableQuantity)
+            @book.Title [@book.PublicationDate.ToLongDateString()] (@book.AvailableQuantity) 
         </li>
     }
 </ul>
