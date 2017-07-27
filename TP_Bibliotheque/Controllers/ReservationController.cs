@@ -15,32 +15,36 @@ namespace TP_Bibliotheque.Controllers
 
         public ReservationController() { }
 
-        public ActionResult Index()
+        public ActionResult Index() // récupérer toutes les réservations en cours
         {
             ReservationModelView modelView = new ReservationModelView((List<BooksBorrowing>)Session["BooksBorrowing"]);
             return View(modelView);
         }
 
-        public ActionResult Return(int Id)
+        public ActionResult Return(int Id) // Marquer une réservation comme retournée
         {
+            // Récupération des réservations en cours
             ReservationDAL dal = new ReservationDAL((List<BooksBorrowing>)Session["BooksBorrowing"]);
 
             BooksBorrowing resa = dal.Read(Id);
 
+            // Marqué la reservation comme retournée et la mettre à jour
             resa.isReturned = true;
             dal.Update(resa.Id, resa);
 
             return RedirectToAction("Index");
         }
 
-        public ActionResult Add()
+        public ActionResult Add() // Création d'une nouvelle reservation
         {
+            // Récupération data membres + livre
             MemberDAL memberDAL = new MemberDAL((List<Member>)Session["Members"]);
             List<Member> members = memberDAL.GetAll();
 
             BookDAL bookDAL = new BookDAL((List<Book>)Session["Books"]);
             List<Book> books = bookDAL.GetAvailableBooks();
 
+            // Création de la réservation
             var model = new AddResaViewModel();
             model.members = GetSelectListItemsMember(members);
             model.books = GetSelectListItemsBook(books);
@@ -53,6 +57,7 @@ namespace TP_Bibliotheque.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "user, book, bookSelected, memberSelected")]AddResaViewModel model)
         {
+            // Récupération data réservation + membre + livre
             ReservationDAL dal = new ReservationDAL((List<BooksBorrowing>)Session["BooksBorrowing"]);
             MemberDAL memberDAL = new MemberDAL((List<Member>)Session["Members"]);
             BookDAL bookDAL = new BookDAL((List<Book>)Session["Books"]);
@@ -65,10 +70,12 @@ namespace TP_Bibliotheque.Controllers
 
             model.resa = new BooksBorrowing();
 
+            // Selection du livre pour la reservation
             Book selectedBook = bookDAL.Read(model.bookSelected);
             model.resa.book = selectedBook;
 
-            selectedBook.AvailableQuantity -= 1;
+            // Mise a jour de la quantité disponible
+            selectedBook.AvailableQuantity -= 1; 
             bookDAL.Update(selectedBook.Id, selectedBook);
 
             Member selectedMember = memberDAL.Read(model.memberSelected);
