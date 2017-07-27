@@ -16,7 +16,8 @@
 
 @if (Model.GetReservations().Count <= 0)
 {
-    <p>This user hasn't borrowed any book yet.</p>
+    <p>This user hasn't borrowed any book yet. You can delete it.<br />
+        @Html.ActionLink("Delete this member", "Delete", new { id = Model.getMember().Id })</p>
 }
 
 @foreach (var resa in @Model.GetReservations())

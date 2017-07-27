@@ -35,6 +35,17 @@ namespace TP_Bibliotheque.Controllers
             return View(model);
         }
 
+        public ActionResult Delete(int id) // Suppression d'un membre
+        {
+            MemberDAL memberDAL = new MemberDAL((List<Member>)Session["Members"]);
+
+            Member member = memberDAL.Read(id); // R2cupération des infos d'un livre pour un id donné
+            memberDAL.Delete(id);
+
+            MembersModelView model = new MembersModelView((List<Member>)Session["Members"]);
+            return View(model);
+        }
+
         public ActionResult Edit(int id) // Pour l'édition du membre
         {
             // Récupération des données de membres + lecture data du membre sélectionné
