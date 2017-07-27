@@ -55,7 +55,7 @@ namespace TP_Bibliotheque.Controllers
             var model = new EditMemberModelView(); // Création du model d'édition
             model.member = member; // Ajout du membre au model d'edition
 
-            return View(member); // Retour dans la vue des données
+            return View(model); // Retour dans la vue des données
         }
 
         public ActionResult Add() //Ajout d'un nouveau membre
@@ -82,7 +82,7 @@ namespace TP_Bibliotheque.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken] // Pour l'édition d'un membre
-        public ActionResult Create([Bind(Include = "member")]EditMemberModelView model) // Passage en paramètre de l'entité membre
+        public ActionResult Edition([Bind(Include = "member")]EditMemberModelView model) // Passage en paramètre de l'entité membre
         {
             //Récupération des datas membres
             MemberDAL dal = new MemberDAL((List<Member>)Session["Members"]);
